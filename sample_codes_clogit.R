@@ -44,11 +44,15 @@ m.data <- cbind(m.data, mpred.set)
 y <- m.data$outcome
 strata <- m.data$subclass
 mCov = m.data %>% select(X1 : eval(expression(paste0('X', p))), W1, W2, W3)
-X.train <- model.matrix( ~ ., mCov)
-clObj = clogitL1(x = X.train, y = y, strata)
+
+# Standardize covariates
+
+mCov.scaled <- scale(mCov, center=TRUE, scale=TRUE)
+X.train <- model.matrix( ~ ., mCov.scaled)
 
 # Run cross validation and select variables picked up by LASSO for the value of ?? that produces the best CV performance. 
 
+clObj = clogitL1(x = X.train, y = y, strata)
 clcvObj = cv.clogitL1(clObj)
 which.beta.pos = which(clcvObj$beta[clcvObj$lambda == clcvObj$minCV_lambda,] > 0)
 names.train = colnames(X.train)[which.beta.pos]
