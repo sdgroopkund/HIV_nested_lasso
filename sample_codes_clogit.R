@@ -3,6 +3,10 @@ library(matchIt)
 library(clogitL1)
 library(survival)
 
+# If any of the above packages are not installed in R, please use the following command to install them
+# For example, to install the package clogitL1, one needs to run the following commented line
+# install.packages('clogitL1')
+
 # Set seed for analysis for reproducibility and declare functions required for the analysis.
 
 set.seed(5132)
