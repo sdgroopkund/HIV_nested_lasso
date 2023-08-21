@@ -52,7 +52,7 @@ mCov = m.data %>% select(X1 : eval(expression(paste0('X', p))), W1, W2, W3)
 # Standardize covariates
 
 mCov.scaled <- scale(mCov, center=TRUE, scale=TRUE)
-mCov.scaled <- data.frame(mCOv.scaled)
+mCov.scaled <- data.frame(mCov.scaled)
 X.train <- model.matrix( ~ ., mCov.scaled)
 
 # Run cross validation and select variables picked up by LASSO for the value of ?? that produces the best CV performance. 
